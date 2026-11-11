@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#173d35">
+<title>宴会仕込みナビ｜仕込み量・発注締切</title>
+<style>
+:root{--ink:#20332e;--muted:#718078;--paper:#f5f6f1;--card:#fff;--green:#1d5949;--green2:#e7f0e9;--line:#e5e9e2;--orange:#b86b32;--shadow:0 12px 34px #1b3c2d0c}
+*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font-family:system-ui,-apple-system,"Noto Sans JP",sans-serif;line-height:1.6}
+header{background:#173d35;color:#fff;padding:24px max(20px,calc((100% - 1120px)/2)) 30px}
+.brand{font-size:12px;letter-spacing:.14em;color:#b8d2c1;font-weight:700}.hero{display:flex;justify-content:space-between;align-items:end;gap:20px;max-width:1120px;margin:14px auto 0}.hero h1{font-size:clamp(25px,4vw,38px);line-height:1.25;margin:0 0 8px}.hero p{margin:0;color:#d0dfd6;font-size:14px}.hero-mark{font-size:42px;opacity:.9}
+main{max-width:1120px;margin:24px auto;padding:0 20px 56px}.layout{display:grid;grid-template-columns:340px 1fr;gap:20px;align-items:start}.panel,.card{background:var(--card);border:1px solid var(--line);border-radius:18px;box-shadow:var(--shadow)}.panel{padding:22px;position:sticky;top:16px}.section-kicker{font-size:11px;letter-spacing:.12em;color:var(--green);font-weight:800}.panel h2,.card h2{font-size:18px;margin:4px 0 18px}.field{margin:0 0 20px}.field label{display:flex;justify-content:space-between;align-items:center;font-size:13px;font-weight:700;margin-bottom:8px}.value{color:var(--green);font-size:18px;font-weight:800;font-variant-numeric:tabular-nums}.field input[type=number],.field input[type=date],.field select{width:100%;border:1px solid #dce3dc;border-radius:10px;padding:12px;background:#fff;color:var(--ink);font:inherit;font-size:15px}.field input:focus,.field select:focus{outline:3px solid #c8dfd0;border-color:var(--green)}input[type=range]{width:100%;accent-color:var(--green);cursor:pointer}.range-meta{display:flex;justify-content:space-between;color:var(--muted);font-size:11px}.hint{font-size:11px;color:var(--muted);margin:7px 0 0}.maincol{display:grid;gap:18px}.card{padding:22px}.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:12px}.stat{background:#f5f8f4;border-radius:12px;padding:14px}.stat span{display:block;color:var(--muted);font-size:11px}.stat strong{display:block;font-size:23px;color:var(--green);margin-top:2px}.stat small{font-size:11px;color:var(--muted)}.card-head{display:flex;justify-content:space-between;gap:12px;align-items:center;margin-bottom:12px}.card-head h2{margin:0}.pill{background:var(--green2);color:var(--green);border-radius:99px;padding:5px 10px;font-size:11px;font-weight:800}
+.table-wrap{overflow-x:auto}table{width:100%;border-collapse:collapse;font-size:13px;min-width:460px}th{text-align:left;color:var(--muted);font-size:11px;font-weight:700;background:#f7f8f5}th,td{padding:12px 10px;border-bottom:1px solid var(--line)}td:last-child,th:last-child{text-align:right}td:nth-child(3),th:nth-child(3){text-align:right}.qty{font-weight:800;color:var(--green);font-variant-numeric:tabular-nums}.group-row td{background:#fbfcfa;color:var(--green);font-size:11px;font-weight:800;padding-top:9px;padding-bottom:8px}.deadline-list{display:grid;gap:10px}.deadline{display:grid;grid-template-columns:42px 1fr auto;gap:12px;align-items:center;padding:12px;border:1px solid var(--line);border-radius:12px}.deadline-icon{width:40px;height:40px;display:grid;place-items:center;background:#f3f5ef;border-radius:11px;font-size:19px}.deadline strong{font-size:13px}.deadline p{margin:2px 0 0;color:var(--muted);font-size:11px}.date-badge{text-align:right;font-size:12px;font-weight:800;color:var(--green);white-space:nowrap}.date-badge small{display:block;color:var(--muted);font-size:10px;font-weight:500}.note{background:#fff8ee;border:1px solid #f1e2cd;border-radius:12px;padding:13px 15px;font-size:12px;color:#78502f;margin-top:14px}.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}button{border:0;border-radius:10px;padding:11px 16px;font:inherit;font-size:13px;font-weight:800;cursor:pointer}.primary{background:var(--green);color:#fff}.secondary{background:#eef2ed;color:var(--green)}button:hover{filter:brightness(.96)}button:focus-visible{outline:3px solid #9dc8ad;outline-offset:2px}.footer{text-align:center;color:var(--muted);font-size:11px;margin-top:22px}
+@media(max-width:780px){.layout{grid-template-columns:1fr}.panel{position:static}.hero-mark{display:none}main{margin-top:16px;padding-inline:14px}.card,.panel{padding:18px}.stats{gap:7px}.stat{padding:11px}.stat strong{font-size:20px}}
+@media(max-width:420px){.stats{grid-template-columns:1fr 1fr}.stats .stat:last-child{grid-column:span 2}.deadline{grid-template-columns:36px 1fr}.deadline-icon{width:36px;height:36px}.date-badge{grid-column:2;text-align:left}.hero p{font-size:12px}}
+</style>
+</head>
+<body>
+<header><div class="brand">KITCHEN SUPPORT / 宴会準備</div><div class="hero"><div><h1>宴会仕込みナビ</h1><p>人数とコースを選ぶだけ。仕込み量と、卸への発注締切をひと目で。</p></div><div class="hero-mark" aria-hidden="true">◒</div></div></header>
+<main>
+<div class="layout">
+<aside class="panel">
+<div class="section-kicker">01 / RESERVATION</div><h2>予約内容を入力</h2>
+<div class="field"><label for="guests">ご予約人数 <span class="value"><output id="guestOut">20</output> 名</span></label><input id="guests" type="range" min="2" max="100" step="1" value="20"><div class="range-meta"><span>2名</span><span>100名</span></div></div>
+<div class="field"><label for="guestNum">人数を直接入力</label><input id="guestNum" type="number" min="2" max="100" value="20"></div>
+<div class="field"><label for="course">コースを選択</label><select id="course"><option value="standard">季節の宴会コース（4,500円）</option><option value="premium">特選おもてなしコース（6,000円）</option><option value="light">お手軽コース（3,500円）</option></select></div>
+<div class="field"><label for="eventDate">宴会の日付</label><input id="eventDate" type="date"><p class="hint">日付を変えると発注締切も自動で更新します。</p></div>
+<div class="field"><label for="buffer">予備率 <span class="value"><output id="bufferOut">8</output>%</span></label><input id="buffer" type="range" min="0" max="20" step="1" value="8"><div class="range-meta"><span>ロスなし</span><span>多めに確保</span></div><p class="hint">食材のロス・おかわり分を見込んだ上乗せです。</p></div>
+</aside>
+<section class="maincol">
+<div class="card">
+<div class="section-kicker">02 / PREPARATION PLAN</div><div class="card-head"><h2>仕込みの全体像</h2><span class="pill" id="courseLabel">季節の宴会コース</span></div>
+<div class="stats"><div class="stat"><span>予約人数</span><strong id="statGuests">20名</strong><small>ご来店予定</small></div><div class="stat"><span>食材アイテム</span><strong id="statItems">8品</strong><small>発注・仕込み対象</small></div><div class="stat"><span>仕込み開始目安</span><strong id="statStart">—</strong><small>宴会当日から逆算</small></div></div>
+</div>
+<div class="card">
+<div class="card-head"><h2>食材ごとの仕込み量</h2><span class="pill">予備率込み</span></div>
+<div class="table-wrap"><table><thead><tr><th>食材</th><th>用途</th><th>1人前</th><th>必要量</th></tr></thead><tbody id="ingredientRows"></tbody></table></div>
+<div class="actions"><button class="primary" id="csvBtn" type="button">仕込み表をCSV保存 ↓</button><button class="secondary" id="printBtn" type="button">印刷する</button></div>
+</div>
+<div class="card">
+<div class="card-head"><h2>卸への発注締切</h2><span class="pill">目安スケジュール</span></div>
+<div class="deadline-list" id="deadlines"></div>
+<div class="note">※ 締切は一般的な発注リードタイムを仮定した目安です。実際の締切・休業日・配送曜日は、契約している卸業者に必ず確認してください。</div>
+</div>
+</section>
+</div>
+<div class="footer">宴会仕込みナビ · 入力内容はこのブラウザ内だけで処理されます</div>
+</main>
+<script>
+const courses={
+ standard:{name:"季節の宴会コース",items:[["鶏もも肉","焼き物",120,"g","肉類"],["刺身盛り合わせ","お造り",90,"g","鮮魚"],["豚バラ肉","鍋物",80,"g","肉類"],["白菜","鍋物",100,"g","青果"],["長ねぎ","鍋物",35,"g","青果"],["豆腐","鍋物",80,"g","青果"],["米","食事",75,"g","乾物・米"],["季節のデザート","甘味",1,"個","青果"]] },
+ premium:{name:"特選おもてなしコース",items:[["和牛","焼き物",140,"g","肉類"],["旬の刺身盛り合わせ","お造り",120,"g","鮮魚"],["ずわい蟹","蒸し物",90,"g","鮮魚"],["有頭海老","焼き物",1,"尾","鮮魚"],["季節野菜","前菜",100,"g","青果"],["米","食事",80,"g","乾物・米"],["茶碗蒸し","蒸し物",1,"個","青果"],["季節の甘味","甘味",1,"個","青果"]] },
+ light:{name:"お手軽コース",items:[["鶏もも肉","焼き物",100,"g","肉類"],["まぐろ・サーモン","お造り",65,"g","鮮魚"],["豚バラ肉","鍋物",65,"g","肉類"],["キャベツ","鍋物",90,"g","青果"],["もやし","鍋物",60,"g","青果"],["豆腐","鍋物",60,"g","青果"],["米","食事",70,"g","乾物・米"],["漬物","小鉢",25,"g","青果"]]}
+};
+const groups=[
+ {name:"肉類",icon:"🥩",days:3,time:"12:00",desc:"肉屋・精肉卸への注文目安"},
+ {name:"鮮魚",icon:"🐟",days:2,time:"10:00",desc:"鮮魚店・市場への注文目安"},
+ {name:"青果",icon:"🥬",days:2,time:"15:00",desc:"青果卸への注文目安"},
+ {name:"乾物・米",icon:"🍚",days:5,time:"17:00",desc:"米穀・乾物卸への注文目安"}
+];
+const $=id=>document.getElementById(id);
+const fmt=n=>n.toLocaleString("ja-JP");
+function localDate(d){return new Date(d.getFullYear(),d.getMonth(),d.getDate())}
+function shiftDate(date,days){const d=new Date(date);d.setDate(d.getDate()+days);return d}
+function dateText(d){return d.toLocaleDateString("ja-JP",{month:"numeric",day:"numeric",weekday:"short"})}
+function render(){
+ const count=Math.max(2,Math.min(100,Number($("guestNum").value)||2));
+ const buffer=Number($("buffer").value)/100,course=courses[$("course").value];
+ const date=$("eventDate").value?new Date($("eventDate").value+"T12:00:00"):shiftDate(new Date(),7);
+ const items=course.items.map(([name,use,per,unit,group])=>({name,use,per,unit,group,amount:Math.ceil(count*per*(1+buffer))}));
+ $("guestOut").textContent=count;$("statGuests").textContent=count+"名";$("bufferOut").textContent=Math.round(buffer*100);
+ $("courseLabel").textContent=course.name;$("statItems").textContent=items.length+"品";
+ $("statStart").textContent=dateText(shiftDate(date,-3)).replace(/\(.+\)/,"");
+ $("ingredientRows").innerHTML=groups.map(g=>{
+ const rows=items.filter(i=>i.group===g.name);if(!rows.length)return "";
+ return '<tr class="group-row"><td colspan="4">'+g.icon+' '+g.name+'</td></tr>'+rows.map(i=>'<tr><td><strong>'+i.name+'</strong></td><td>'+i.use+'</td><td>'+i.per+i.unit+'</td><td class="qty">'+fmt(i.amount)+i.unit+'</td></tr>').join("");
+ }).join("");
+ $("deadlines").innerHTML=groups.filter(g=>items.some(i=>i.group===g.name)).map(g=>{
+ const due=shiftDate(date,-g.days),today=localDate(new Date()),diff=Math.ceil((localDate(due)-today)/86400000);
+ let status=diff<0?"締切日を過ぎています":diff===0?"本日が締切":"あと"+diff+"日";
+ return '<div class="deadline"><div class="deadline-icon">'+g.icon+'</div><div><strong>'+g.name+'の発注</strong><p>'+g.desc+' · '+g.days+'日前締切</p></div><div class="date-badge">'+dateText(due)+'<small>'+g.time+'まで · '+status+'</small></div></div>';
+ }).join("");
+ window.currentItems=items;window.currentCourse=course;window.currentCount=count;
+}
+$("guests").addEventListener("input",e=>{$("guestNum").value=e.target.value;render()});
+$("guestNum").addEventListener("input",e=>{const n=Math.max(2,Math.min(100,Number(e.target.value)||2));$("guests").value=n;render()});
+["course","eventDate","buffer"].forEach(id=>$(id).addEventListener("input",render));
+$("csvBtn").addEventListener("click",()=>{
+ const rows=[["食材","用途","1人前","必要量","人数"],...window.currentItems.map(i=>[i.name,i.use,i.per+i.unit,i.amount+i.unit,window.currentCount])];
+ const csv="\uFEFF"+rows.map(r=>r.map(v=>'"'+String(v).replace(/"/g,'""')+'"').join(",")).join("\r\n");
+ const url=URL.createObjectURL(new Blob([csv],{type:"text/csv;charset=utf-8"}));const a=document.createElement("a");a.href=url;a.download="宴会仕込み表.csv";a.click();URL.revokeObjectURL(url);
+});
+$("printBtn").addEventListener("click",()=>window.print());
+const today=new Date();const defaultDate=shiftDate(today,7);$("eventDate").value=[defaultDate.getFullYear(),String(defaultDate.getMonth()+1).padStart(2,"0"),String(defaultDate.getDate()).padStart(2,"0")].join("-");
+render();
+</script>
+</body></html>

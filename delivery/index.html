@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#f5f7f4">
+<title>デリバリー手数料シミュレーター</title>
+<style>
+:root{--ink:#17231f;--muted:#718078;--line:#e5ebe6;--bg:#f5f7f4;--card:#fff;--green:#147d58;--mint:#e6f4ed;--orange:#ed9a42;--blue:#6d91d5;--red:#d66d62;--shadow:0 12px 35px rgba(28,52,40,.06)}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans JP",sans-serif;line-height:1.55}button,input{font:inherit}.wrap{max-width:1180px;margin:auto;padding:34px 28px 60px}.top{display:flex;justify-content:space-between;align-items:center;margin-bottom:30px}.brand{display:flex;gap:11px;align-items:center;font-weight:800;letter-spacing:.02em}.mark{width:38px;height:38px;border-radius:12px;background:var(--green);color:#fff;display:grid;place-items:center;font-size:19px}.eyebrow{font-size:11px;letter-spacing:.14em;color:var(--green);font-weight:800;text-transform:uppercase}.top-note{font-size:12px;color:var(--muted)}h1{font-size:clamp(26px,4vw,38px);letter-spacing:-.04em;line-height:1.25;margin:7px 0 10px}.intro{color:var(--muted);font-size:14px;margin:0}.hero{margin-bottom:26px}.layout{display:grid;grid-template-columns:minmax(310px,.88fr) minmax(0,1.35fr);gap:20px;align-items:start}.card{background:var(--card);border:1px solid var(--line);border-radius:20px;box-shadow:var(--shadow)}.panel{padding:24px}.section-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px}.section-head h2{font-size:16px;margin:0}.step{font-size:11px;color:var(--muted);background:#f1f4f1;padding:5px 9px;border-radius:20px}.field{margin:0 0 21px}.field:last-child{margin-bottom:0}.field-top{display:flex;justify-content:space-between;gap:12px;align-items:center;margin-bottom:9px}.field label{font-size:13px;font-weight:700}.value{font-weight:800;font-size:16px;font-variant-numeric:tabular-nums}.unit{font-size:11px;color:var(--muted);font-weight:500;margin-left:3px}.range-row{display:flex;align-items:center;gap:12px}.range-row input[type=range]{width:100%;accent-color:var(--green);cursor:pointer}.num{width:106px;flex:0 0 106px;border:1px solid var(--line);border-radius:10px;padding:8px 10px;text-align:right;color:var(--ink);background:#fbfcfb;font-weight:700;outline:none}.num:focus{border-color:var(--green);box-shadow:0 0 0 3px #147d5818}.hint{font-size:11px;color:var(--muted);margin-top:6px}.results{display:grid;gap:16px}.net-card{padding:23px 25px;background:linear-gradient(125deg,#123f30,#17684b);color:white;border:0;position:relative;overflow:hidden}.net-card:after{content:"";position:absolute;width:230px;height:230px;border:1px solid #ffffff1c;border-radius:50%;right:-75px;top:-125px;box-shadow:0 0 0 28px #ffffff09,0 0 0 58px #ffffff06}.net-label{font-size:12px;color:#c5e2d4;font-weight:600}.net-amount{font-size:clamp(34px,5vw,46px);font-weight:850;letter-spacing:-.045em;margin:5px 0 4px;font-variant-numeric:tabular-nums}.net-sub{font-size:12px;color:#c5e2d4}.stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}.stat{padding:17px 16px}.stat-label{font-size:11px;color:var(--muted);font-weight:600}.stat-value{font-size:clamp(18px,2.5vw,23px);font-weight:800;letter-spacing:-.03em;margin-top:6px;font-variant-numeric:tabular-nums;overflow-wrap:anywhere}.stat-note{font-size:10px;color:var(--muted);margin-top:2px}.analysis{padding:22px 24px}.analysis-grid{display:grid;grid-template-columns:170px 1fr;gap:25px;align-items:center}.donut-wrap{display:grid;justify-items:center;gap:8px}.donut{width:154px;height:154px;border-radius:50%;background:conic-gradient(var(--green) 0% 55%,var(--orange) 55% 72%,var(--blue) 72% 90%,var(--red) 90% 100%);position:relative;transition:background .2s}.donut:after{content:"";position:absolute;inset:23px;background:#fff;border-radius:50%}.donut-center{position:absolute;z-index:1;inset:0;display:grid;place-content:center;text-align:center}.donut-center strong{font-size:18px}.donut-center span{font-size:10px;color:var(--muted)}.legend{display:grid;gap:13px}.legend-row{display:grid;grid-template-columns:10px minmax(0,1fr) auto;gap:9px;align-items:center;font-size:12px}.dot{width:9px;height:9px;border-radius:3px}.legend-name{color:#526158}.legend-val{font-weight:750;font-variant-numeric:tabular-nums}.bar-section{padding:22px 24px}.bar-title{font-size:14px;font-weight:750;margin:0 0 17px}.bar-row{display:grid;grid-template-columns:92px 1fr 94px;gap:12px;align-items:center;margin:13px 0}.bar-name{font-size:11px;color:var(--muted)}.track{height:9px;background:#eff2ef;border-radius:10px;overflow:hidden}.fill{height:100%;border-radius:10px;transition:width .2s}.bar-val{text-align:right;font-size:12px;font-weight:750;font-variant-numeric:tabular-nums}.foot{font-size:11px;color:var(--muted);margin:18px 2px 0}.reset{border:1px solid var(--line);background:#fff;border-radius:9px;padding:7px 11px;font-size:11px;color:#536259;cursor:pointer}.reset:hover{border-color:var(--green);color:var(--green)}.assumption{margin-top:16px;padding:13px 15px;border-radius:12px;background:#f4f7f4;color:#68766e;font-size:11px}
+@media(max-width:800px){.wrap{padding:24px 18px 44px}.layout{grid-template-columns:1fr}.panel{padding:21px}.results{gap:13px}.analysis-grid{grid-template-columns:145px 1fr;gap:18px}.donut{width:136px;height:136px}}
+@media(max-width:480px){.wrap{padding:19px 13px 34px}.top{margin-bottom:23px}.top-note{display:none}.panel,.analysis,.bar-section{padding:18px}.stats{grid-template-columns:1fr 1fr}.stat:last-child{grid-column:1/-1}.stat{padding:14px}.analysis-grid{grid-template-columns:1fr;gap:18px}.legend{width:100%}.bar-row{grid-template-columns:76px 1fr 82px;gap:8px}.net-card{padding:21px}.field{margin-bottom:20px}.num{width:96px;flex-basis:96px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header class="top"><div class="brand"><div class="mark">↗</div><span>STORE<span style="color:var(--green)">MARGIN</span></span></div><div class="top-note">店舗運営のための収益チェックツール</div></header>
+<section class="hero"><div class="eyebrow">DELIVERY PROFIT LAB</div><h1>デリバリー手数料<br>シミュレーター</h1><p class="intro">条件を動かして、注文ごと・1日あたりの利益構造をチェック。</p></section>
+<main class="layout">
+<section class="card panel">
+<div class="section-head"><h2>シミュレーション条件</h2><span class="step">INPUT 01</span></div>
+<div class="field"><div class="field-top"><label for="price">注文1件あたり金額</label><span class="value" id="priceLabel">¥1,500</span></div><div class="range-row"><input id="price" type="range" min="500" max="8000" step="100" value="1500"><input class="num" id="priceNum" type="number" min="0" max="100000" step="100" value="1500" aria-label="注文1件あたり金額（円）"></div><div class="hint">お客様が支払う商品代金の想定（税込・送料等を除く）</div></div>
+<div class="field"><div class="field-top"><label for="orders">1日の注文数</label><span class="value" id="ordersLabel">30<span class="unit">件</span></span></div><div class="range-row"><input id="orders" type="range" min="1" max="200" step="1" value="30"><input class="num" id="ordersNum" type="number" min="0" max="10000" step="1" value="30" aria-label="1日の注文数"></div></div>
+<div class="field"><div class="field-top"><label for="fee">プラットフォーム手数料率</label><span class="value" id="feeLabel">30<span class="unit">%</span></span></div><div class="range-row"><input id="fee" type="range" min="0" max="50" step=".5" value="30"><input class="num" id="feeNum" type="number" min="0" max="100" step=".5" value="30" aria-label="手数料率（%）"></div><div class="hint">売上に対して差し引かれる手数料の割合</div></div>
+<div class="field"><div class="field-top"><label for="cost">料理の原価率</label><span class="value" id="costLabel">30<span class="unit">%</span></span></div><div class="range-row"><input id="cost" type="range" min="0" max="100" step=".5" value="30"><input class="num" id="costNum" type="number" min="0" max="100" step=".5" value="30" aria-label="料理の原価率（%）"></div></div>
+<div class="field"><div class="field-top"><label for="delivery">店が負担する配達費用</label><span class="value" id="deliveryLabel">¥150<span class="unit">/件</span></span></div><div class="range-row"><input id="delivery" type="range" min="0" max="1500" step="10" value="150"><input class="num" id="deliveryNum" type="number" min="0" max="10000" step="10" value="150" aria-label="店負担の配達費用（円）"></div></div>
+<div style="display:flex;justify-content:flex-end;margin-top:5px"><button class="reset" id="reset" type="button">↺ 初期値に戻す</button></div>
+</section>
+<section class="results">
+<div class="card net-card"><div class="net-label">店舗の手元に残る金額（1日）</div><div class="net-amount" id="dailyNet">¥0</div><div class="net-sub">1件あたり <strong id="perOrderNet">¥0</strong> が店舗の利益として残ります</div></div>
+<div class="stats">
+<div class="card stat"><div class="stat-label">1日の注文売上</div><div class="stat-value" id="dailySales">¥0</div><div class="stat-note">注文金額 × 注文数</div></div>
+<div class="card stat"><div class="stat-label">プラットフォーム収入</div><div class="stat-value" id="platformIncome">¥0</div><div class="stat-note">手数料収入（1日）</div></div>
+<div class="card stat"><div class="stat-label">店舗の利益率</div><div class="stat-value" id="margin">0%</div><div class="stat-note">売上に対する手残り割合</div></div>
+</div>
+<div class="card analysis"><div class="section-head"><h2>売上の配分</h2><span class="step">PER DAY</span></div><div class="analysis-grid"><div class="donut-wrap"><div class="donut" id="donut"><div class="donut-center"><strong id="donutTotal">¥45,000</strong><span>注文売上合計</span></div></div></div><div class="legend">
+<div class="legend-row"><span class="dot" style="background:var(--green)"></span><span class="legend-name">店舗の手残り</span><strong class="legend-val" id="legNet">¥0</strong></div>
+<div class="legend-row"><span class="dot" style="background:var(--orange)"></span><span class="legend-name">プラットフォーム手数料</span><strong class="legend-val" id="legFee">¥0</strong></div>
+<div class="legend-row"><span class="dot" style="background:var(--blue)"></span><span class="legend-name">食材原価</span><strong class="legend-val" id="legCost">¥0</strong></div>
+<div class="legend-row"><span class="dot" style="background:var(--red)"></span><span class="legend-name">店舗負担の配達費用</span><strong class="legend-val" id="legDelivery">¥0</strong></div>
+</div></div></div>
+<div class="card bar-section"><h2 class="bar-title">1件あたりの収益内訳</h2>
+<div class="bar-row"><span class="bar-name">店舗の手残り</span><div class="track"><div class="fill" id="barNet" style="background:var(--green);width:0%"></div></div><strong class="bar-val" id="oneNet">¥0</strong></div>
+<div class="bar-row"><span class="bar-name">手数料</span><div class="track"><div class="fill" id="barFee" style="background:var(--orange);width:0%"></div></div><strong class="bar-val" id="oneFee">¥0</strong></div>
+<div class="bar-row"><span class="bar-name">食材原価</span><div class="track"><div class="fill" id="barCost" style="background:var(--blue);width:0%"></div></div><strong class="bar-val" id="oneCost">¥0</strong></div>
+<div class="bar-row"><span class="bar-name">配達費用</span><div class="track"><div class="fill" id="barDelivery" style="background:var(--red);width:0%"></div></div><strong class="bar-val" id="oneDelivery">¥0</strong></div>
+<div class="assumption">※ 手残り＝注文金額 − プラットフォーム手数料 − 食材原価 − 店舗負担の配達費用。人件費・容器代・販促費・消費税等は含まない概算です。プラットフォーム収入は店舗売上から差し引かれる手数料相当額として表示しています。</div>
+</div>
+<p class="foot">このシミュレーターは概算です。実際の契約条件・精算方式に合わせて数値を調整してください。</p>
+</section>
+</main>
+</div>
+<script>
+(() => {
+const defaults={price:1500,orders:30,fee:30,cost:30,delivery:150};
+const ids=Object.keys(defaults);
+const yen=n=>'¥'+Math.round(n).toLocaleString('ja-JP');
+const pct=n=>n.toFixed(1).replace(/\.0$/,'')+'%';
+function setText(id,value){document.getElementById(id).textContent=value}
+function update(changed){
+ids.forEach(k=>{
+ const range=document.getElementById(k),num=document.getElementById(k+'Num');
+ if(changed===k){range.value=num.value; if(num.value==='')range.value=0;}
+ else num.value=range.value;
+ const v=Number(range.value);
+ if(k==='price')setText('priceLabel',yen(v));
+ if(k==='orders')document.getElementById('ordersLabel').innerHTML=v.toLocaleString('ja-JP')+'<span class="unit">件</span>';
+ if(k==='fee'||k==='cost')document.getElementById(k+'Label').innerHTML=pct(v)+'<span class="unit">%</span>';
+ if(k==='delivery')document.getElementById('deliveryLabel').innerHTML=yen(v)+'<span class="unit">/件</span>';
+});
+const v=Object.fromEntries(ids.map(k=>[k,Number(document.getElementById(k).value)||0]));
+const sales=v.price*v.orders,fee=sales*v.fee/100,cost=sales*v.cost/100,delivery=v.delivery*v.orders,net=sales-fee-cost-delivery,perNet=v.price*(1-v.fee/100-v.cost/100)-v.delivery;
+setText('dailyNet',yen(net));setText('perOrderNet',yen(perNet));setText('dailySales',yen(sales));setText('platformIncome',yen(fee));setText('margin',sales?pct(net/sales*100):'—');
+setText('donutTotal',yen(sales));setText('legNet',yen(net));setText('legFee',yen(fee));setText('legCost',yen(cost));setText('legDelivery',yen(delivery));
+const parts=[net,fee,cost,delivery],colors=['var(--green)','var(--orange)','var(--blue)','var(--red)'];
+if(sales>0){
+ let pos=0;const stops=parts.map((n,i)=>{const start=pos;pos+=Math.max(0,n)/sales*100;return colors[i]+' '+start+'% '+pos+'%'}).join(',');
+ document.getElementById('donut').style.background='conic-gradient('+stops+')';
+}else document.getElementById('donut').style.background='#e9eeea';
+[['Net',perNet],['Fee',v.price*v.fee/100],['Cost',v.price*v.cost/100],['Delivery',v.delivery]].forEach(([k,n])=>{
+ setText('one'+k,yen(n));document.getElementById('bar'+k).style.width=Math.max(0,Math.min(100,v.price?n/v.price*100:0))+'%';
+});
+}
+ids.forEach(k=>{
+ document.getElementById(k).addEventListener('input',()=>update(k));
+ document.getElementById(k+'Num').addEventListener('input',()=>update(k));
+ document.getElementById(k+'Num').addEventListener('change',e=>{
+ const el=e.currentTarget;el.value=Math.max(Number(el.min),Math.min(Number(el.max),Number(el.value)||0));update(k);
+ });
+});
+document.getElementById('reset').addEventListener('click',()=>{ids.forEach(k=>{document.getElementById(k).value=defaults[k];document.getElementById(k+'Num').value=defaults[k]});update()});
+update();
+})();
+</script>
+</body>
+</html>
